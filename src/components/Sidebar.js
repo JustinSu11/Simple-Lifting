@@ -2,31 +2,48 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
 import { SidebarData } from './SidebarData';
 import SubMenu from './SubMenu';
 import { IconContext } from 'react-icons/lib';
 
 const Nav = styled.div`
-  background: aliceblue;
+  background: #212121;
   height: 80px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 `;
 
-const NavIcon = styled(Link)`
+const WName = styled.a`
+  text-decoration: none;
   margin-left: 2rem;
   font-size: 2rem;
-  height: 80px;
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
+`;
+
+const ToggleButton = styled.button`
+  background: transparent;
+  border: none;
+  cursor: pointer;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  text-decoration: none;
+  padding: 0.5rem;
+  margin-right: 2rem;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
+const ToggleIcon = styled(FaIcons.FaBars)`
+  font-size: 1.5rem;
+  color: #ffffff;
 `;
 
 const SidebarNav = styled.nav`
-  background: aliceblue;
+  background: #212121;
   width: ${({ showSidebar }) => (showSidebar ? '250px' : '0')};
   height: 100vh;
   display: flex;
@@ -35,34 +52,27 @@ const SidebarNav = styled.nav`
   top: 0;
   left: 0;
   transition: 350ms;
-  z-index: 10;
-
-  @media (min-width: 768px) {
-    width: 250px;
-  }
+  z-index: 1;
 `;
 
 const SidebarWrap = styled.div`
   width: 100%;
-`;
-
-const WName = styled.a`
-  text-decoration: none;
+  padding-top: 100px;
 `;
 
 const Sidebar = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 767) {
-        setShowSidebar(true);
-      } else {
         setShowSidebar(false);
+      } else {
+        setShowSidebar(true);
       }
     };
 
-    handleResize(); // Initial check on component mount
+    handleResize(); 
 
     window.addEventListener('resize', handleResize);
 
@@ -71,26 +81,23 @@ const Sidebar = () => {
     };
   }, []);
 
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
+
   return (
     <>
-      <IconContext.Provider value={{ color: 'gray' }}>
+      <IconContext.Provider value={{ color: '#ffffff' }}>
         <Nav>
-          <WName href="/about-us">
-            <h1 style={{ textAlign: 'center', marginLeft: '200px', color: 'gray' }}>Simple Lifting</h1>
-          </WName>
-          {showSidebar && (
-            <NavIcon to="#">
-              <AiIcons.AiOutlineClose onClick={() => setShowSidebar(false)} />
-            </NavIcon>
+          <WName href="/about-us">Simple Lifting</WName>
+          {showSidebar ? null : (
+            <ToggleButton onClick={toggleSidebar}>
+              <ToggleIcon />
+            </ToggleButton>
           )}
         </Nav>
         <SidebarNav showSidebar={showSidebar}>
           <SidebarWrap>
-            {!showSidebar && (
-              <NavIcon to="#">
-                <FaIcons.FaBars onClick={() => setShowSidebar(true)} />
-              </NavIcon>
-            )}
             {SidebarData.map((item, index) => {
               return <SubMenu item={item} key={index} />;
             })}

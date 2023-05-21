@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 const SidebarLink = styled(Link)`
     display: flex;
-    color: gray;
-    justifyy-content: space-between;
+    color: #ffffff;
+    justify-content: space-between;
     align-items: center;
     padding: 20px;
     list-style: none;
@@ -25,7 +25,7 @@ const SidebarLabel = styled.span`
 `;
 
 const DropdownLink = styled(Link)`
-    background: grey;
+    background: #424242;
     height: 60px;
     padding-left: 3rem;
     display: flex;
@@ -47,7 +47,7 @@ const SubMenu = ({ item }) => {
 
     return(
         <>
-            <SidebarLink to ={item.path} onClick={item.subNav && showSubnav}>
+            <SidebarLink to={item.path} onClick={item.subNav && showSubnav}>
                 <div>
                     {item.icon}
                     <SidebarLabel>{item.title}</SidebarLabel>
@@ -56,12 +56,9 @@ const SubMenu = ({ item }) => {
                     {item.subNav && subnav ? item.iconOpened : item.subNav ? item.iconClosed : null}
                 </div>
             </SidebarLink>
-            {subnav && item.subNav.map((item, index) => {
+            {subnav && item.subNav.map((subItem, index) => {
                 return (
-                    <DropdownLink to={item.path} key={index}>
-                        {item.icon}
-                        <SidebarLabel>{item.title}</SidebarLabel>
-                    </DropdownLink>
+                    <SubMenu item={subItem} />
                 );
             })}
         </>
