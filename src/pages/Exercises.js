@@ -40,10 +40,66 @@ export const ChestPress = () => {
     )
 }
 
+export const InclineChestPress = () => {
+    return (
+        <div className='home'>
+            <h1>Incline Chest Press</h1>
+        </div>
+    )
+}
+
 export const Shoulders = () => {
     return (
         <div className='home'>
             <h1>Shoulders</h1>
+        </div>
+    );
+};
+
+export const ShoulderPress = () => {
+    return (
+        <div className='home'>
+            <h1>Shoulder Press</h1>
+        </div>
+    );
+};
+
+export const LateralRaises = () => {
+    return (
+        <div className='home'>
+            <h1>Lateral Raises</h1>
+        </div>
+    );
+};
+
+export const RearDeltFly = () => {
+    return (
+        <div className='home'>
+            <h1>Rear Delt Fly</h1>
+        </div>
+    );
+};
+
+export const Tricep = () => {
+    return (
+        <div className='home'>
+            <h1>Tricep</h1>
+        </div>
+    );
+};
+
+export const TricepPushdown = () => {
+    return (
+        <div className='home'>
+            <h1>Tricep Pushdown</h1>
+        </div>
+    );
+};
+
+export const OverheadTricepExtension = () => {
+    return (
+        <div className='home'>
+            <h1>Overhead Tricep Extension</h1>
         </div>
     );
 };
